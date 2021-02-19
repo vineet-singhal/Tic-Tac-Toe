@@ -1,5 +1,9 @@
 var o_image = "https://www.dlf.pt/dfpng/middlepng/499-4993682_letter-o-with-sunflower-hd-png-download.png";
-var x_image = "https://www.dlf.pt/dfpng/middlepng/550-5502271_x-letter-png-letter-x-clipart-transparent-png.png";
+var x_image = "images/cross.jpg";
+var x_gif = "images/cross.gif";
+var x_idel = "images/player1_idel.gif";
+var x_win = "images/player1_win.gif";
+var x_lose = "images/player1_lose.gif";
 var player_id = 1;
 var player = document.getElementById("player");
 var played = [0,0,0,0,0,0,0,0,0];
@@ -11,7 +15,7 @@ var clicked = function(btn){
         total++;
         played[btn.id-1] = player_id;
         if(player_id==1){
-            btn.style.backgroundImage = "url("+x_image+")";
+            btn.style.backgroundImage = "url("+x_idel+")";
             player.innerHTML = "Player 2 turn";
         }
         else{
@@ -27,6 +31,20 @@ var clicked = function(btn){
             });
             if(win){
                 game_over = true;
+                arr.forEach((data)=>{
+                    var btn = document.getElementById(data);
+                    if(player_id==1){
+                        btn.style.backgroundImage = "url("+x_win+")";
+                    }
+                });
+                if(player_id==2){
+                    for(var i=1 ; i<10 ; i++){
+                        if(played[i-1]==1){
+                            var btn = document.getElementById(i);
+                            btn.style.backgroundImage = "url("+x_lose+")";
+                        }
+                    }
+                }
             }
         });
         if(game_over){
